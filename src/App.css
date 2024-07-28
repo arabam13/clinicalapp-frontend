@@ -4,6 +4,36 @@
     margin-top: 100px;
 }
 
+.AddPatientForm{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.AddPatientForm > button{
+    border: transparent;
+    background-color: cyan;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.label{
+    margin: 0;
+    /* font-weight: 500; */
+}
+.fieldname > input {
+    margin-top: 10px;
+    border: transparent;
+    background-color: lightcyan;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* font-weight: 300; */
+    font-size: 20px;
+}
+
 h2{
     margin-bottom: 50px;
 }
