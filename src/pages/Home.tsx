@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 const  Home = () => {
   const { patients, isLoading, error } = usePatients();
+  // console.log({patients});
 
   return (
     <div>

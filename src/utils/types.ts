@@ -9,4 +9,12 @@ export type PatientType = {
   firstName: string;
   lastName: string;
   age: number;
+  clinicalData: ClinicalDataType[];
+};
+
+export type ClinicalDataType = {
+  id: string;
+  componentName: string;
+  componentValue: string;
+  measuredDateTime: Date;
 };

@@ -1,7 +1,7 @@
 import { PatientsContext } from "@/services/PatientsContextProvider.tsx";
 import { useContext } from "react";
 
-const useProperties = () => {
+const usePatients = () => {
   const patientsContext = useContext(PatientsContext);
 
   if (!patientsContext) {
@@ -13,4 +13,4 @@ const useProperties = () => {
   return patientsContext;
 };
 
-export default useProperties;
+export default usePatients;
