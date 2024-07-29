@@ -70,6 +70,7 @@ th{
     outline: none;
     background-color: lightcyan;
     margin-left: 10px;
+    font-size: 14px;
 }
 .componentValue{
     border: transparent;
@@ -77,7 +78,8 @@ th{
     outline: none;
     background-color: lightcyan;
     margin-left: 102px;
-    width: 172px;
+    width: 178px;
+    font-size: 14px;
 }
 
 .datePicker{
@@ -92,7 +94,8 @@ th{
     background-color: lightcyan;
     margin-bottom: 30px;
     margin-left: 102px;
-    width: 172px;
+    width: 178px;
+    font-size: 14px;
 }
 
 .buttonCollectClinicals{
@@ -104,5 +107,5 @@ th{
     font-weight: bold;
     margin-left: 102px;
     margin-bottom: 40px;
-    width: 194px;
+    width: 200px;
 }
