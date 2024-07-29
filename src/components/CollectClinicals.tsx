@@ -1,10 +1,17 @@
 import usePatients from "@/services/hooks/usePatients.ts";
 import { PatientType } from "@/utils/types.ts";
+import { format, toZonedTime } from 'date-fns-tz';
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+const convertToFrenchTimezoneISO = (date: Date): string => {
+    const timeZone = 'Europe/Paris';
+    const zonedDate = toZonedTime(date, timeZone);
+    return format(zonedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", { timeZone });
+};
 
 const CollectClinicals = () => {
     const location = useLocation();
@@ -15,7 +22,7 @@ const CollectClinicals = () => {
     const [clinicalData, setClinicalData] = useState({
         "componentName": "",
         "componentValue": "",
-        "measuredDateTime": new Date().toISOString(),
+        "measuredDateTime": convertToFrenchTimezoneISO(new Date()),
         "patientId": item.id
     });
 
@@ -32,7 +39,7 @@ const CollectClinicals = () => {
         if (!clinicalData.componentName || !clinicalData.componentValue|| !clinicalData.measuredDateTime) {
             return;
         }
-        // console.log(clinicalData);
+        // console.log({clinicalData});
         fetch(import.meta.env.VITE_IMPORT_API_URL + '/clinicals', {
             method: "POST",
             headers: {
@@ -61,7 +68,7 @@ const CollectClinicals = () => {
                                     id: newClinicalData.id,
                                     componentName: newClinicalData.componentName,
                                     componentValue: newClinicalData.componentValue,
-                                    measuredDateTime: newClinicalData.measuredDateTime,
+                                    measuredDateTime: newClinicalData.measuredDateTime as Date,
                                     patient: {
                                         id: item.id,
                                         firstName: item.firstName,
@@ -95,12 +102,11 @@ const CollectClinicals = () => {
     };
 
     const handleChangeDate = (date: Date | null) => {
-        // console.log({date: date ? format(date, 'dd/MM/yyyy') : null});
-        // console.log({date: date ? date.toISOString() : null});
+        console.log({date: date ? convertToFrenchTimezoneISO(date) : null});
         if (date) {
             setClinicalData(prevState => ({
                 ...prevState,
-                measuredDateTime: date.toISOString()
+                measuredDateTime: convertToFrenchTimezoneISO(date)
             }));
         }
     };
