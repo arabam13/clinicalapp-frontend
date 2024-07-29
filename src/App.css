@@ -64,3 +64,45 @@ th{
     color: white;
 }
 
+.componentName{
+    border: transparent;
+    padding: 10px;
+    outline: none;
+    background-color: lightcyan;
+    margin-left: 10px;
+}
+.componentValue{
+    border: transparent;
+    padding: 10px;
+    outline: none;
+    background-color: lightcyan;
+    margin-left: 102px;
+    width: 172px;
+}
+
+.datePicker{
+    display: flex;
+    flex-direction: column;
+}
+
+.datePicker .measuredDateTime{
+    border: transparent;
+    padding: 10px;
+    outline: none;
+    background-color: lightcyan;
+    margin-bottom: 30px;
+    margin-left: 102px;
+    width: 172px;
+}
+
+.buttonCollectClinicals{
+    border: transparent;
+    padding: 10px;
+    outline: none;
+    background-color: cyan;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 102px;
+    margin-bottom: 40px;
+    width: 194px;
+}

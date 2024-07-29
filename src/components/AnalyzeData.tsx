@@ -18,6 +18,7 @@ const AnalyzeData = () => {
 
   return (
     <div>
+        <Link to={"/"}>Go Back</Link>
         <h2>Patient Details:</h2>
         {item && (
           <>
@@ -27,7 +28,7 @@ const AnalyzeData = () => {
             <br /><br />
             <span style={{marginRight: '48px'}}>Age:</span> <b>{item.age}</b>
             <h2>Clinical Report:</h2>
-            <div style={{marginBottom: '30px'}}>
+            <div style={{marginTop: '30px'}}>
               <table align="center">
                   <thead>
                       <tr>
@@ -39,7 +40,6 @@ const AnalyzeData = () => {
                   {item.clinicalData.map((eachEntry: ClinicalDataType) => <ClinicalData item={eachEntry} key={eachEntry.id}/>)}
                 </table>
               </div>
-            <Link to={"/"}>Go Back</Link>
           </>
         )}
     </div>

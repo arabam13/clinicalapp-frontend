@@ -121,33 +121,37 @@ const CollectClinicals = () => {
 
                         <h2>Patient Clinical Data:</h2>
                         <form onSubmit={handleSubmit}>
-                        Clinical Entry Type:
-                        <select name="componentName" onChange={handleChange}>
-                            <option value={clinicalData.componentName}>Select One</option>
-                            <option value="bp">Blood Pressure(Sys/Dys)</option>
-                            <option value="hw">Height/Weight</option>
-                            <option value="heartrate">Heart Rate</option>
-                        </select>
-                        <br /> <br />
-                        Value:
-                        <input
-                            type="text"
-                            name="componentValue"
-                            value={clinicalData.componentValue}
-                            onChange={handleChange}
-                        />
-                        <br /> <br />
-                        <h3>Select Date</h3>
-                        <DatePicker
-                            name="measuredDateTime"
-                            selected={clinicalData.measuredDateTime ? new Date(clinicalData.measuredDateTime) : new Date()}
-                            onChange={handleChangeDate}
-                            dateFormat="dd/MM/yyyy"
-                            placeholderText="Select a date"
-                        />
-                        <button onClick={handleSubmit}>Confirm</button>
+                            <span>Clinical Entry Type:</span>
+                            <select name="componentName" onChange={handleChange} className="componentName">
+                                <option value={clinicalData.componentName}>Select One</option>
+                                <option value="bp">Blood Pressure(Sys/Dys)</option>
+                                <option value="hw">Height/Weight</option>
+                                <option value="heartrate">Heart Rate</option>
+                            </select>
+                            <br /> <br />
+                            Value:
+                            <input
+                                type="text"
+                                name="componentValue"
+                                className="componentValue"
+                                value={clinicalData.componentValue}
+                                onChange={handleChange}
+                            />
+                            <br /> <br />
+                            <div className="datePicker">
+                                <h3>Select Date</h3>
+                                <DatePicker
+                                    name="measuredDateTime"
+                                    className="measuredDateTime"
+                                    selected={clinicalData.measuredDateTime ? new Date(clinicalData.measuredDateTime) : new Date()}
+                                    onChange={handleChangeDate}
+                                    dateFormat="dd/MM/yyyy"
+                                    placeholderText="Select a date"
+                                />
+                                <button onClick={handleSubmit} className="buttonCollectClinicals">Confirm</button>
+                            </div>
                         </form>
-                        <Link to={"/"} style={{marginTop: "10px"}}>Go Back</Link>
+                        <Link to={"/"} style={{marginLeft: '155px'}}>Go Back</Link>
                     </div>
                 </>
             )}
