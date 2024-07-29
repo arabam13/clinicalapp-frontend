@@ -52,6 +52,7 @@ export const PatientsContextProvider = ({ children }: PropsWithChildren) => {
     <PatientsContext.Provider
       value={{
         patients,
+        setPatients,
         isLoading,
         error,
       }}

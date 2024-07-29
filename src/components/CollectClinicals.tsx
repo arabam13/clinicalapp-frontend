@@ -1,18 +1,21 @@
+import usePatients from "@/services/hooks/usePatients.ts";
+import { PatientType } from "@/utils/types.ts";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CollectClinicals = () => {
     const location = useLocation();
     const { item } = location.state || {};
     const navigate = useNavigate();
+    const {setPatients} =usePatients();
 
     const [clinicalData, setClinicalData] = useState({
         "componentName": "",
         "componentValue": "",
-        "measuredDateTime":"",
+        "measuredDateTime": new Date().toISOString(),
         "patientId": item.id
     });
 
@@ -36,18 +39,49 @@ const CollectClinicals = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(clinicalData),
-        }).then(() => {
+        }).then(async(response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+            return await response.json();
+        })
+        .then((responseJSON) => {
+            // console.log({responseJSON});
+            const newClinicalData = JSON.parse(JSON.stringify(responseJSON));
+            // console.log({newClinicalData});
+            setPatients((prev: PatientType[]) => {
+                return prev.map((patient) => {
+                    if (patient.id === item.id) {
+                        return {
+                            ...patient,
+                            clinicalData: [
+                                ...patient.clinicalData,
+                                {
+                                    id: newClinicalData.id,
+                                    componentName: newClinicalData.componentName,
+                                    componentValue: newClinicalData.componentValue,
+                                    measuredDateTime: newClinicalData.measuredDateTime,
+                                    patient: {
+                                        id: item.id,
+                                        firstName: item.firstName,
+                                        lastName: item.lastName,
+                                        age: item.age
+                                    }
+                                }
+                            ]
+                        };
+                    }
+                    return patient;
+                });
+            });
             toast.success("ClinicalData added successfully!");
             navigate('/');
-        }).catch(() => {
+        })
+        .catch(() => {
             toast.error("Error in adding ClinicalData!");
         }  );
-        setClinicalData({
-            "componentName": "",
-            "componentValue": "",
-            "measuredDateTime":"",
-            "patientId": ""
-        });
+
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement|HTMLSelectElement >) => {
@@ -113,6 +147,7 @@ const CollectClinicals = () => {
                         />
                         <button onClick={handleSubmit}>Confirm</button>
                         </form>
+                        <Link to={"/"} style={{marginTop: "10px"}}>Go Back</Link>
                     </div>
                 </>
             )}

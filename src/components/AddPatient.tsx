@@ -1,3 +1,5 @@
+import usePatients from "@/services/hooks/usePatients.ts";
+import { PatientType } from "@/utils/types.ts";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,6 +11,7 @@ const AddPatient = () => {
         age: ""
     });
     const firstNameRef = useRef<HTMLInputElement>(null);
+    const {setPatients} = usePatients();
 
     useEffect(() => {
         if (firstNameRef.current) {
@@ -37,18 +40,31 @@ const AddPatient = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(patientData),
-        }).then(() => {
-            toast.success("Patient added successfully!");
-        });
-        setPatientData({
-            firstName: "",
-            lastName: "",
-            age: ""
+        }).then(async(response) => {
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error);
+            }
+            return await response.json();
         })
-        if (firstNameRef.current) {
-            firstNameRef.current.focus();
-        }
-
+        .then((responseJSON) => {
+            const newPatient = JSON.parse(JSON.stringify(responseJSON));
+            setPatients((prev: PatientType[]) => {
+                return [...prev, newPatient];
+                }
+            );
+            toast.success("Patient added successfully!");
+            setPatientData({
+                firstName: "",
+                lastName: "",
+                age: ""
+            })
+            if (firstNameRef.current) {
+                firstNameRef.current.focus();
+            }
+        }).catch(() => {
+            toast.error("Error in adding Patient!");
+        });
     }
 
     return (

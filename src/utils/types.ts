@@ -1,11 +1,12 @@
 export type PatientsContextType = {
   patients: PatientType[];
+  setPatients: React.Dispatch<React.SetStateAction<PatientType[]>>;
   isLoading: boolean;
   error: string | null;
 };
 
 export type PatientType = {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   age: number;
@@ -13,8 +14,9 @@ export type PatientType = {
 };
 
 export type ClinicalDataType = {
-  id: string;
+  id: number;
   componentName: string;
   componentValue: string;
   measuredDateTime: Date;
+  patient: Omit<PatientType, "clinicalData">;
 };
