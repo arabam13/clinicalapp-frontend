@@ -28,7 +28,7 @@ const AnalyzeData = () => {
             <br /><br />
             <span style={{marginRight: '48px'}}>Age:</span> <b>{item.age}</b>
             <h2>Clinical Report:</h2>
-            <div style={{marginTop: '30px'}}>
+            <div style={{marginTop: '30px', marginBottom: '30px'}}>
               <table align="center">
                   <thead>
                       <tr>
