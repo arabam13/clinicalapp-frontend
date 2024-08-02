@@ -37,7 +37,7 @@ const AnalyzeData = () => {
                           <th>Measured Date Time</th>
                       </tr>
                   </thead>
-                  {item.clinicalData.map((eachEntry: ClinicalDataType) => <ClinicalData item={eachEntry} key={eachEntry.id}/>)}
+                  {item.clinicalData && item.clinicalData.map((eachEntry: ClinicalDataType) => <ClinicalData item={eachEntry} key={eachEntry.id}/>)}
                 </table>
               </div>
           </>
