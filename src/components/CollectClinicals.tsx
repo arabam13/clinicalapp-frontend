@@ -56,7 +56,7 @@ const CollectClinicals = () => {
         .then((responseJSON) => {
             // console.log({responseJSON});
             const newClinicalData = JSON.parse(JSON.stringify(responseJSON));
-            // console.log({newClinicalData});
+            console.log({newClinicalData});
             setPatients((prev: PatientType[]) => {
                 return prev.map((patient) => {
                     if (patient.id === item.id) {
