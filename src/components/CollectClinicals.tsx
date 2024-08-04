@@ -62,21 +62,7 @@ const CollectClinicals = () => {
                     if (patient.id === item.id) {
                         return {
                             ...patient,
-                            clinicalData: [
-                                ...patient.clinicalData,
-                                {
-                                    id: newClinicalData.id,
-                                    componentName: newClinicalData.componentName,
-                                    componentValue: newClinicalData.componentValue,
-                                    measuredDateTime: newClinicalData.measuredDateTime as Date,
-                                    patient: {
-                                        id: item.id,
-                                        firstName: item.firstName,
-                                        lastName: item.lastName,
-                                        age: item.age
-                                    }
-                                }
-                            ]
+                            clinicalData: Array.isArray(patient.clinicalData) ? [...patient.clinicalData, newClinicalData] : []
                         };
                     }
                     return patient;
