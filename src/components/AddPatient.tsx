@@ -49,8 +49,13 @@ const AddPatient = () => {
         })
         .then((responseJSON) => {
             const newPatient = JSON.parse(JSON.stringify(responseJSON));
+            const newPatientWithClinicalData = {
+                ...newPatient,
+                clinicalData: []
+            };
+            // console.log({newPatientWithClinicalData});
             setPatients((prev: PatientType[]) => {
-                return [...prev, newPatient];
+                return [...prev, newPatientWithClinicalData];
                 }
             );
             toast.success("Patient added successfully!");
